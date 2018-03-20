@@ -1,33 +1,26 @@
 pragma solidity ^0.4.0;
-// cung cap chuc nang chuyen car cơ bản, chuyển non-fungible cơ bản
-contract CarOwnerShip is CarBase, ERC721 {
 
-    string public constant name = "CryptoCar";
-    string public constant symbol = "CK";
+contract HammereOwnerShip is HammerBase, ERC721{
+    string public constant name = "CryptoHammer";
+    string public constant symbol = "CH";
 
-    // check xem address hiện tại có sở hữu car có tokenid này không
+    // check xem address hiện tại có sở hữu hammer có tokenid này không
     function _owns(address _claimant, uint256 _tokenId) internal view returns (bool) {
         return carIndexToOwner[_tokenId] == _claimant;
     }
 
 
-    //claimant là địa chỉ mà chúng ta sẽ comfirm rằng car sẽ được approve
+    //claimant là địa chỉ mà chúng ta sẽ comfirm rằng hammer sẽ được approve
     function _approvedFor(address _claimant, uint256 _tokenId) internal view returns (bool) {
         return carIndexToApproved[_tokenId] == _claimant;
     }
 
-    //function approve dùng để chấp nhận việc đưa car lên aution, và ghi đề lên bất cyws thứ gì đã được approval trước đó
-    function _approve(uint256 _tokenId, address _approved) internal {
-        carIndexToApproved[_tokenId] = _approved;
-    }
-
-
-    // check balance của user có bao nhiêu car
+    // check balance của user có bao nhiêu hammer
     function balanceOf(address _owner) public view returns (uint256 count) {
         return ownershipTokenCount[_owner];
     }
 
-    //chuyển car từ người bán sang người mua, việc chuyển phải đảm bảo dựa hoàn toàn vào tiêu chuẩn ERC721 nếu không cẩ sẽ mất vĩn viễn
+    //chuyển car từ store sang người mua, việc chuyển phải đảm bảo dựa hoàn toàn vào tiêu chuẩn ERC721 nếu không cẩ sẽ mất vĩn viễn
     function transfer(address _to, uint256 _tokenId) external WhenNotPaused{
         // đảm bảo rằng địa chỉ của người gửi khác 0
         require(_to !=address(0));
@@ -38,14 +31,6 @@ contract CarOwnerShip is CarBase, ERC721 {
         _transfer(msg.sender, _to, _tokenId);
     }
 
-    // tương tự đối với approve
-    function approve(address _to, uint256 _tokenId) external WhenNotPaused {
-        require(_owns(msg.sender, _tokenId));
-        // check xem bên aution đã được chấp nhận chưa
-        _approve(_tokenId, _to);
-        // đối chứng đối với ERC721
-        Approval(msg.sender, _to, _tokenId);
-    }
 
     // hàm check việc chuyển bắt nguồn từ ai
     function transferFrom(address _from, address _to, uint256 _tokenId) external WhenNotPaused {
@@ -58,7 +43,7 @@ contract CarOwnerShip is CarBase, ERC721 {
         _transfer(_from, _to, _tokenId);
     }
 
-    // xác định số car đang tồn tại
+    // xác định số hammer đang tồn tại
     function totalSupply() public view returns (uint) {
         return cars.length -1;
     }
@@ -80,14 +65,13 @@ contract CarOwnerShip is CarBase, ERC721 {
             uint256 resultIndex = 0;
             uint256 carId;
 
-            for(carId = 1; carId <=totalCats; carId++){
-                if(kittyIndexToOwner[carId] == _owner){
-                    result[resultIndex] = carId;
-                    resultIndex++
-                }
+        for(carId = 1; carId <=totalCats; carId++){
+            if(kittyIndexToOwner[carId] == _owner){
+                result[resultIndex] = carId;
+                resultIndex++
             }
-    return result;
+        }
+        return result;
     }
 }
-
 }

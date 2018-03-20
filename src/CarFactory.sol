@@ -9,9 +9,8 @@ contract CarFactory is CarBase {
 
     event Created(address owner, uint256 carId, uint256 matronId, uint256 generation, string type);
 
-    Car[] public cars;
     function _creatCar(
-                address _owner;
+                address  _owner;
                 uint256 _matronId;
                 string _type;
                 uint256 _color;
@@ -27,10 +26,11 @@ contract CarFactory is CarBase {
                 generateSafeRand();
     }
 
-    function _createRandomZombies(_matronId, _type, _color) internal {
+    function _createRandomCars(_matronId, _type, _color) internal {
                 require[ownerCarCount[msg.sender] == 0];
                 uint randGener = generateSafeRand();
                 _createCar(msg.sender,_matronId, _type, _color, randGener);
+                cars.push(_name,_type,randGener,,,,,,);
     }
 
 }

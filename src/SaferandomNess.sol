@@ -71,9 +71,7 @@ contract SafeRandomness {
     }
 
     function generateSafeRand() internal view returns (uint){
-
         uint result = _pickRandomAlgorythm();
-
         while (result == 0) {
             result += _pickRandomAlgorythm();
         }
