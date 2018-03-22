@@ -5,12 +5,14 @@ contract CarBase is CarAccessControl {
     struct CarBase{
         string name;
         string type;
+        uint8 level;
         uint16 generation;
         uint64 upgradeTime;
         uint64 cooldownUpgrade; // thoi gian gioi han giua 2 lan do xe
         uint32 matronId;        //id cua xe TRuoc do khi đập với búa
         uint32 hammerId;        // id cua búa khi đập với xe đó
         uint16 cooldownIndex;   // số lần độ - sẽ giới hạn index <3 / 1 ngày
+
     }
 
     uint32[14] public cooldowns = [

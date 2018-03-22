@@ -10,7 +10,7 @@ contract CarFactory is CarBase {
     event Created(address owner, uint256 carId, uint256 matronId, uint256 generation, string type);
 
     function _creatCar(
-                address  _owner;
+                address _owner;
                 uint256 _matronId;
                 string _type;
                 uint256 _color;
@@ -32,5 +32,8 @@ contract CarFactory is CarBase {
                 _createCar(msg.sender,_matronId, _type, _color, randGener);
                 cars.push(_name,_type,randGener,,,,,,);
     }
+
+
+
 
 }

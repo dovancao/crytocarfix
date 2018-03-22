@@ -88,6 +88,21 @@ contract CarOwnerShip is CarBase, ERC721 {
             }
     return result;
     }
-}
+    }
+
+    // dua ra thoi gian do xe cua car
+
+
+    function _levelUp(address _owner, uint256 _generation, uint256 _carId) internal view return (uint8){
+        require(carIndexToOwner[_carId] == _owner);
+        if(_owner != address(0)){
+            while(uint8 _level == 0){
+                _level += 1
+            }
+        return _level;
+    }
+    }
+
+
 
 }
