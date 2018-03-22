@@ -47,19 +47,16 @@ contract ParkBase {
     public uint256 clock;
 
     // hàm giảm duration cơ bản, mỗi khi được gọi thì duration giảm 1 sec
-    function _startDuration(uint256 _tokenId, address _guest) internal view return (uint256){
+    function _startDuration(uint _tokenId, address _guest) internal view return (uint){
         duration -= clock;
         return duration;
     }
 
-    // hàm tăng exp cơ bản , mỗi khi được gọi thì exp tăng 1
-    function _startIncreaseExp(uint256 _tokenId, address _guest) internal return (uint256) {
+    // hàm tăng exp cơ bản , mỗi khi được gọi thì exp tăng
+    function _startIncreaseExp(uint _tokenId, address _guest) internal return (uint) {
         startExp += clock
         return startExp;
     }
-
-
-
 
 
 }

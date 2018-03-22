@@ -7,14 +7,14 @@ contract CarFactory is CarBase {
     uint generationDigits = 4;
     uint geneModulus = 10 ** generationDigits;
 
-    event Created(address owner, uint256 carId, uint256 matronId, uint256 generation, string type);
+    event Created(address owner, uint carId, uint matronId, uint generation, string type);
 
     function _creatCar(
                 address _owner;
-                uint256 _matronId;
+                uint32 _matronId;
                 string _type;
-                uint256 _color;
-                uint256 _generation;
+                uint8 _color;
+                uint8 _generation;
     ) interal returns (uint) {
                 require(_matronId == uint256(uint32(_matronId)));
                 require(_color  == uint256(uint32(_color));
@@ -26,7 +26,7 @@ contract CarFactory is CarBase {
                 generateSafeRand();
     }
 
-    function _createRandomCars(_matronId, _type, _color) internal {
+    function _createRandomCars(_matronId, _type, _color) public {
                 require[ownerCarCount[msg.sender] == 0];
                 uint randGener = generateSafeRand();
                 _createCar(msg.sender,_matronId, _type, _color, randGener);

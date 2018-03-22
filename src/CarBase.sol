@@ -36,12 +36,12 @@ contract CarBase is CarAccessControl {
 
     Car[] cars; /// tạo 1 mảng chứa car
 
-    mapping (uint256 => address)  public carIndexToOwner;       //mapping đưa vào iD của car va trả về address của chủ sở hữ
-    mapping (address => uint256)  public ownershipTokenCount;   // trả về số token (số car) mà người đó sở hữu
-    mapping (uint256 => address)  public carIndexToApproval;    //value la id cua car trả về address của người được approval transfer
-    mapping (uint256 => address)  public upgradeAllowedToAddress;
+    mapping (uint => address)  public carIndexToOwner;       //mapping đưa vào iD của car va trả về address của chủ sở hữ
+    mapping (address => uint)  public ownershipTokenCount;   // trả về số token (số car) mà người đó sở hữu
+    mapping (uint => address)  public carIndexToApproval;    //value la id cua car trả về address của người được approval transfer
+    mapping (uint => address)  public upgradeAllowedToAddress;
 // chuyen ô tô hiếm _tokenId là id của car
-    function _transfer(address _from, address _to, uint256 _tokenId) internal {
+    function _transfer(address _from, address _to, uint _tokenId) internal {
             ownershipTokenCount[_to]++;
             carIndexToOwner[_tokenId] = _to;
             if(_from != address(0)){
