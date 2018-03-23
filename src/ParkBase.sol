@@ -17,7 +17,7 @@ contract ParkBase {
 
     Park[] public parks;
 
-    event ParkCreated(uint256 _carTokenId, uint256 _moneyEscrow, uint256 _startedAt, uint256 _duration);
+    event ParkCreated(uint256 _carTokenId, uint _moneyEscrow, uint _startedAt, uint _duration);
     event ParkSuccesful(uint256 _carTokenId, uint256 _moneyEscrow, uint _exp);
     event ParkPenalize(uint256 _cartokenId);
 
@@ -25,7 +25,7 @@ contract ParkBase {
     mapping (address => uint256) parkIndexTotalCount; // trả về số chỗ còn có thể park của address
 
     //set park fee : chỉ có COO mới có quyền set
-    function setParkFee(uint256 val) external onlyCOO {
+    function setParkFee(uint8 val) external onlyCOO {
         autoParkFee = val
     }
 
@@ -45,6 +45,8 @@ contract ParkBase {
     public uint256 duration = 1 minute; // thoi gian do mac dinh la 1 minute
     pubblic uint256 startExp = 0;       // mặc định exp ban đầu bằng 0
     public uint256 clock;
+    public uint256 clockExp;
+
 
     // hàm giảm duration cơ bản, mỗi khi được gọi thì duration giảm 1 sec
     function _startDuration(uint _tokenId, address _guest) internal view return (uint){
@@ -54,7 +56,7 @@ contract ParkBase {
 
     // hàm tăng exp cơ bản , mỗi khi được gọi thì exp tăng
     function _startIncreaseExp(uint _tokenId, address _guest) internal return (uint) {
-        startExp += clock
+        startExp += clockExp;
         return startExp;
     }
 

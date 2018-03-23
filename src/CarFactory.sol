@@ -1,5 +1,6 @@
 pragma solidity ^0.4.0;
 import "./saferandomness.sol";
+import "./CarBase.sol";
 
 
 contract CarFactory is CarBase {
@@ -8,6 +9,7 @@ contract CarFactory is CarBase {
     uint geneModulus = 10 ** generationDigits;
 
     event Created(address owner, uint carId, uint matronId, uint generation, string type);
+
 
     function _creatCar(
                 address _owner;

@@ -9,5 +9,9 @@ contract Player {
     }
 
     Players[] players;
+    modifier aboveLevel(uint _level){
+        require(players.level > _level );
+        _;
+    }
 
 }
